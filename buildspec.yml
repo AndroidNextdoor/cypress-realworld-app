@@ -1,5 +1,9 @@
 version: 0.2
 
+secretsmanager:
+  env:
+    - CYPRESS_DASH_KEY = <Lookup KEY FROM AWS SECRETS MANAGER>
+
 batch:
   fast-fail: false
   build-matrix:
@@ -66,4 +70,4 @@ phases:
   build:
     commands:
       - yarn start:ci & npx wait-on http://localhost:3000
-      - npx cypress run --record --parallel --browser $CY_BROWSER --ci-build-id $CODEBUILD_INITIATOR --group "$CY_GROUP" --spec "$CY_SPEC" --config "$CY_CONFIG"
+      - npx cypress run --record --parallel --browser $CY_BROWSER --ci-build-id $CODEBUILD_INITIATOR --group "$CY_GROUP" --spec "$CY_SPEC" --config "$CY_CONFIG" --record --key "$CYPRESS_DASH_KEY"

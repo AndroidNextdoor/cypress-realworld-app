@@ -23,7 +23,7 @@ describe("Bank Transfer API", function () {
     it("gets a list of bank transfers for user", function () {
       const { id: userId } = ctx.authenticatedUser!;
       cy.request("GET", `${apiBankTransfer}`).then((response) => {
-        expect(response.status).to.eq(200);
+        expect(response.status).to.eq(500);
         expect(response.body.transfers[0].userId).to.eq(userId);
       });
     });
